@@ -40,17 +40,24 @@
 
 }
 
-.button:active {
-    box-shadow: 0 5px rgb(50,50,50);
+.buttonadd:active {
+    box-shadow: 0 5px rgb(28, 82, 52);
+    transform: translateY(5px)
+}
+.buttonsub:active {
+    box-shadow: 0 5px  rgb(175, 47, 0);
     transform: translateY(5px)
 }
 .button:hover {
     filter:brightness(0.75)
 }
+
 .disabled {
     opacity: 0.6;
     cursor: not-allowed;
-    box-shadow: 0 0 grey;
+    box-shadow: 0 0 white;
     transform: translateY(10px);
-  }
+    transition-duration: 0;
+    
+}
 
