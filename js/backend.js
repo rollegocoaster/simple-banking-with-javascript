@@ -26,18 +26,21 @@ function checkInput(){
 
 function enableButtons(deposite, withdraw){
     /**
-     * helper function: inputs either "" or " disabled" and appends them to both button's class name
-     * input "" to enable both buttons or " disabled" to disable them
-     */
+     * helper function: inputs two booleans to control whether the each button should be enabled
+     *      
+    */
     if(deposite == true)
         document.getElementById("add funds").className = "button buttonadd";
     else 
         document.getElementById("add funds").className = "button buttonadd disabled";
-    
+    document.getElementById("add funds").disabled = !deposite;
+
     if(withdraw == true)
         document.getElementById("withdraw").className = "button buttonsub";
     else
         document.getElementById("withdraw").className = "button buttonsub disabled";
+    
+        document.getElementById("withdraw").disabled = !withdraw;
     
 }
 
@@ -76,7 +79,7 @@ function addFunds(){
     if(clearAfterUse)
         document.getElementById("input").value = "";
     // disable/enable both buttons if clearAfterUse is/isn't checked
-    enableButtons(!clearAfterUse, !clearAfterUse); 
+    enableButtons(deposite=!clearAfterUse, withdraw=!clearAfterUse); 
     
 
 }
