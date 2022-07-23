@@ -1,0 +1,56 @@
+.bankheading {
+    background-color: grey;
+    color:black;
+    text-align: center;
+    width: 100%;
+    margin:  0;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-size: 100px;
+}
+.bankbody {
+    margin-left:5%;
+    font-size: 12pt;
+}
+.button {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    margin-left: 5%;
+}
+
+.buttonw {
+    background-color:orangered;
+    color: white;
+    padding: 15px;
+    border: 0px;
+    border-radius: 15%;
+    transition-duration: 0.4s;
+    box-shadow: 0 10px gray;
+
+}
+
+.buttonadd {
+    background-color:seagreen;
+    color: white;
+    padding: 15px;
+    border: 0px;
+    border-radius: 15%;
+    transition-duration: 0.4s;
+    box-shadow: 0 10px gray;
+
+}
+
+.button:active {
+    box-shadow: 0 5px rgb(50,50,50);
+    transform: translateY(5px)
+}
+.button:hover {
+    filter:brightness(0.75)
+}
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: 0 0 grey;
+    transform: translateY(10px);
+  }
+
