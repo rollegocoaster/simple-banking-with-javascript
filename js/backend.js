@@ -1,51 +1,82 @@
-let balance = 100;
-var clearAfterUse = false;
+// global variables
+let balance = 100; // stores the balance to update
+var clearAfterUse = false; // stores whether the checkbox is checked
+
 function change(){
+    /**
+     * updates the clearAfterUse variable to match the new checked state 
+    */
     clearAfterUse = document.getElementById("clearAfterUse").checked;
-    console.log(clearAfterUse)
 }
+
 function checkInput(){
+    /** 
+     * gets the value in the input textbox and enables the buttons accordingly
+     * enables the add funds button if the textbox is not empty
+     * enables the withdraw button if there is enough money in the balance to withdraw 
+    */
     var amount = document.getElementById("input").value;
-    console.log("test",amount > balance);
-    triggerButtons("");
-    if (amount > balance){
-        document.getElementById("withdraw").className = "button buttonw disabled";
-    }
+    // try to enable both buttons if not empty 
+    enableButtons(
+        deposite = (amount != ""), 
+        withdraw = (amount != "" && amount <= balance) 
+    );
     
 }
 
-function triggerButtons(text){
-    if(text=="" || text==" disabled"){
-        document.getElementById("withdraw").className = "button buttonw" + text;
-        document.getElementById("add funds").className = "button buttonadd" + text;
-    }
+function enableButtons(deposite, withdraw){
+    /**
+     * helper function: inputs either "" or " disabled" and appends them to both button's class name
+     * input "" to enable both buttons or " disabled" to disable them
+     */
+    if(deposite == true)
+        document.getElementById("add funds").className = "button buttonadd";
+    else 
+        document.getElementById("add funds").className = "button buttonadd disabled";
+    
+    if(withdraw == true)
+        document.getElementById("withdraw").className = "button buttonsub";
+    else
+        document.getElementById("withdraw").className = "button buttonsub disabled";
+    
 }
 
 
 function withdrawAmount(){
+    /**
+     * subtracts the contents of the input box from the balance 
+     * update buttons if needed
+     */
     var amount = Number(document.getElementById("input").value);
-    if(amount <= balance){
+    if(amount <= balance)// precausion to prevent withdraw even when button is not properly disabled 
+    {
         balance = (balance - amount);
         document.getElementById("balance").innerHTML = "Current Balance: $" + balance.toFixed(2);
+        // if the checkbox is enabled reset the buttons and the input-box
         if(clearAfterUse){
             document.getElementById("input").value = "";
-            triggerButtons(" disabled");
-        } else if(balance == 0) {
-            document.getElementById("withdraw").className = "button buttonw disabled";
+            enableButtons(false,false);
+
+        } else if(balance == 0) // disable button if all the money was withdrawn
+        {
+            document.getElementById("withdraw").className = "button buttonsub disabled";
         }
         
     }
 }
 
 function addFunds(){
+    /**
+     * adds the contents of the input box to the balance
+     * update buttons if needed
+     */
     let amount = Number(document.getElementById("input").value);
     balance = balance + amount;
     document.getElementById("balance").innerHTML = "Current Balance: $" + balance.toFixed(2);
-    if(clearAfterUse){
+    if(clearAfterUse)
         document.getElementById("input").value = "";
-        triggerButtons(" disabled");
-    } else {
-        triggerButtons("");
-    }
+    // disable/enable both buttons if clearAfterUse is/isn't checked
+    enableButtons(!clearAfterUse, !clearAfterUse); 
+    
 
 }
