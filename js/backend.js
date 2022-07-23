@@ -17,10 +17,12 @@ function checkInput(){
     */
     var amount = document.getElementById("input").value;
     // try to enable both buttons if not empty 
-    enableButtons(
-        deposite = (amount != ""), 
-        withdraw = (amount != "" && amount <= balance) 
-    );
+    if(amount != "" && amount > 0){
+        enableButtons(
+            deposite = true, 
+            withdraw = (amount <= balance) 
+        );
+    } else enableButtons(false,false)
     
 }
 
@@ -60,11 +62,11 @@ function withdrawAmount(){
             document.getElementById("input").value = "";
             enableButtons(false,false);
 
-        } else if(balance == 0) // disable button if all the money was withdrawn
+        } else if(amount == 0 || amount > balance)  // disable button if all the money was withdrawn
         {
-            document.getElementById("withdraw").className = "button buttonsub disabled";
+            enableButtons(true,false);
         }
-        
+    } else {
     }
 }
 
