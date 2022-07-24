@@ -19,30 +19,43 @@ function checkInput(){
     // try to enable both buttons if not empty 
     if(amount != "" && amount > 0){
         enableButtons(
-            deposite = true, 
+            deposit = true, 
             withdraw = (amount <= balance) 
         );
     } else enableButtons(false,false)
     
 }
 
-function enableButtons(deposite, withdraw){
+function enableButtons(deposit, withdraw){
     /**
      * helper function: inputs two booleans to control whether the each button should be enabled
      *      
     */
-    if(deposite == true)
+    if(deposit == true)
         document.getElementById("add funds").className = "button buttonadd";
     else 
         document.getElementById("add funds").className = "button buttonadd disabled";
-    document.getElementById("add funds").disabled = !deposite;
+    document.getElementById("add funds").disabled = !deposit;
 
-    if(withdraw == true)
+    if(withdraw == true){
         document.getElementById("withdraw").className = "button buttonsub";
-    else
+        var warn = document.getElementById("warn")
+        if(warn != null){
+            document.getElementById("Balance Input").removeChild(warn);
+        }
+    } else {
         document.getElementById("withdraw").className = "button buttonsub disabled";
+        if(document.getElementById("input").value != ""){
+            var warn = document.createElement("P");
+            warn.className = "warning";
+            warn.id = "warn";
+            warn.innerHTML = "You do not have enough funds to witdraw $" + document.getElementById("input").value + " please deposit more or input a smaller value";
+            document.getElementById("Balance Input").appendChild(warn);
+        }
+    }
     
-        document.getElementById("withdraw").disabled = !withdraw;
+    document.getElementById("withdraw").disabled = !withdraw;
+    console.log("test")
     
 }
 
@@ -65,6 +78,7 @@ function withdrawAmount(){
         } else if(amount == 0 || amount > balance)  // disable button if all the money was withdrawn
         {
             enableButtons(true,false);
+            
         }
     } else {
     }
@@ -81,7 +95,7 @@ function addFunds(){
     if(clearAfterUse)
         document.getElementById("input").value = "";
     // disable/enable both buttons if clearAfterUse is/isn't checked
-    enableButtons(deposite=!clearAfterUse, withdraw=!clearAfterUse); 
+    enableButtons(deposit=!clearAfterUse, withdraw=!clearAfterUse); 
     
 
 }
